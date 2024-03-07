@@ -1,51 +1,49 @@
 export default class HolbertonCourse {
-  /* eslint-disable no-underscore-dangle */
-  /* eslint-disable valid-typeof */
-  /* eslint-disable class-methods-use-this */
-  constructor(name, length, student) {
-    // field names can be initialized or not.
-
-    this._validateType(name, 'string', 'Name');
-    this._validateType(length, 'number', 'Length');
-    this._validateType(student, 'object', 'Student');
+  constructor(name, length, students) {
+    if (typeof name !== 'string') {
+      throw TypeError('name must be a String');
+    }
+    if (typeof length !== 'number') {
+      throw TypeError('length must be a Number');
+    }
+    if (!Array.isArray(students)) {
+      throw TypeError('students must be an Array');
+    }
+    students.forEach((student) => {
+      if (typeof student !== 'string') throw TypeError('student must be a String');
+    });
     this._name = name;
     this._length = length;
-    this._student = student;
+    this._students = students;
   }
 
   get name() {
     return this._name;
   }
 
-  set name(newName) {
-    if (typeof newName !== 'string') throw TypeError('Name must be string');
-    this._name = newName;
-  }
-
   get length() {
     return this._length;
   }
 
+  get students() {
+    return this._students;
+  }
+
+  set name(newName) {
+    if (typeof newName !== 'string') throw TypeError('name must be a String');
+    this._name = newName;
+  }
+
   set length(newLength) {
-    if (typeof newLength !== 'number') {
-      throw TypeError('Length must be number');
-    }
+    if (typeof newLength !== 'number') throw TypeError('length must be a Number');
     this._length = newLength;
   }
 
-  get student() {
-    return this._student;
-  }
-
-  set student(newStudent) {
-      // if (!Array.isArray(newStudent)) throw TypeError('Student must be array');
-      this._validateType(newStudent, 'object', 'Student');
-    this._student = newStudent;
-  }
-
-  _validateType(value, expectedType, fieldName) {
-    if (typeof value !== expectedType) {
-      throw new TypeError(`${fieldName} must be of type ${expectedType}`);
-    }
+  set students(newStudents) {
+    if (!Array.isArray(newStudents)) throw TypeError('students must be an Array');
+    newStudents.forEach((student) => {
+      if (typeof student !== 'string') throw TypeError('student must be a String');
+    });
+    this._students = newStudents;
   }
 }
