@@ -1,12 +1,5 @@
-/**
- * Contains the miscellaneous route handlers.
- * @author Noran  <https://github.com/Noransaber>
- */
-class AppController {
+module.exports = class AppController {
   static getHomepage(request, response) {
     response.status(200).send('Hello Holberton School!');
   }
-}
-
-export default AppController;
-module.exports = AppController;
+};
